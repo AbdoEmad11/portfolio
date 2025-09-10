@@ -8,6 +8,7 @@ import '../../core/widgets/custom_button.dart';
 import '../../data/models/project_model.dart';
 import '../widgets/projects_view/project_card.dart';
 import '../widgets/projects_view/project_filter_chip.dart';
+import 'project_gallery_page.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -403,15 +404,58 @@ class _ProjectsPageState extends State<ProjectsPage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (project.imageUrl != null && project.imageUrl!.isNotEmpty) ...[
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Hero(
-                          tag: 'project-image-${project.id}',
-                          child: AspectRatio(
-                            aspectRatio: 16/9,
-                            child: Image.asset(
-                              project.imageUrl!,
-                              fit: BoxFit.cover,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop(); // Close dialog first
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ProjectGalleryPage(projectId: project.id),
+                            ),
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Hero(
+                            tag: 'project-image-${project.id}',
+                            child: AspectRatio(
+                              aspectRatio: 16/9,
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  Image.asset(
+                                    project.imageUrl!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.transparent,
+                                          Colors.black.withOpacity(0.3),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 16,
+                                    right: 16,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.6),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: const Icon(
+                                        Icons.zoom_in,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
