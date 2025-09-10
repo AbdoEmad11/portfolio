@@ -14,7 +14,32 @@ class _StatsSectionState extends State<StatsSection>
   late List<AnimationController> _controllers;
   late List<Animation<double>> _animations;
 
-  final List<StatItem> _stats = [];
+  final List<StatItem> _stats = [
+    StatItem(
+      title: 'Projects Completed',
+      value: '10+',
+      icon: Icons.work_rounded,
+      color: const Color(0xFF2196F3),
+    ),
+    StatItem(
+      title: 'Years Experience',
+      value: '2+',
+      icon: Icons.schedule_rounded,
+      color: const Color(0xFF4CAF50),
+    ),
+    StatItem(
+      title: 'Technologies',
+      value: '15+',
+      icon: Icons.code_rounded,
+      color: const Color(0xFFFF9800),
+    ),
+    StatItem(
+      title: 'Happy Clients',
+      value: '5+',
+      icon: Icons.people_rounded,
+      color: const Color(0xFF9C27B0),
+    ),
+  ];
 
   @override
   void initState() {

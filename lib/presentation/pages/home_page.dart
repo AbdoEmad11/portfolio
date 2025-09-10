@@ -239,19 +239,19 @@ class _HomePageState extends State<HomePage>
               Row(
                 children: [
                   _buildSocialButton(
-                    icon: Icons.email_rounded,
+                    icon: FontAwesomeIcons.envelope,
                     onTap: () => AppHelpers.launchEmail(AppConstants.email),
                     tooltip: 'Email',
                   ),
                   const SizedBox(width: 16),
                   _buildSocialButton(
-                    icon: Icons.work_rounded,
+                    icon: FontAwesomeIcons.linkedin,
                     onTap: () => AppHelpers.launchURL(AppConstants.linkedIn),
                     tooltip: 'LinkedIn',
                   ),
                   const SizedBox(width: 16),
                   _buildSocialButton(
-                    icon: Icons.code_rounded,
+                    icon: FontAwesomeIcons.github,
                     onTap: () => AppHelpers.launchURL(AppConstants.github),
                     tooltip: 'GitHub',
                   ),
@@ -312,19 +312,19 @@ class _HomePageState extends State<HomePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildSocialButton(
-              icon: Icons.email_rounded,
+              icon: FontAwesomeIcons.envelope,
               onTap: () => AppHelpers.launchEmail(AppConstants.email),
               tooltip: 'Email',
             ),
             const SizedBox(width: 16),
             _buildSocialButton(
-              icon: Icons.work_rounded,
+              icon: FontAwesomeIcons.linkedin,
               onTap: () => AppHelpers.launchURL(AppConstants.linkedIn),
               tooltip: 'LinkedIn',
             ),
             const SizedBox(width: 16),
             _buildSocialButton(
-              icon: Icons.code_rounded,
+              icon: FontAwesomeIcons.github,
               onTap: () => AppHelpers.launchURL(AppConstants.github),
               tooltip: 'GitHub',
             ),
