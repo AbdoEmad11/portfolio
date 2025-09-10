@@ -6,9 +6,10 @@ import '../../core/utils/constants.dart';
 import '../../core/utils/extensions.dart';
 import '../../core/utils/helpers.dart';
 import '../widgets/home_view/hero_section.dart';
+import '../widgets/home_view/about_preview_section.dart';
+import '../widgets/home_view/services_preview_section.dart';
 import '../widgets/home_view/featured_projects_section.dart';
-import '../widgets/home_view/skills_overview_section.dart';
-import '../widgets/home_view/stats_section.dart';
+import '../widgets/home_view/testimonials_section.dart';
 import '../widgets/home_view/contact_cta_section.dart';
 
 class HomePage extends StatefulWidget {
@@ -83,8 +84,17 @@ class _HomePageState extends State<HomePage>
           // Hero Section
           const HeroSection(),
 
+          // About Preview Section
+          const AboutPreviewSection(),
+
+          // Services Preview Section
+          const ServicesPreviewSection(),
+
           // Featured Projects
           const FeaturedProjectsSection(),
+
+          // Testimonials/Achievements Section
+          const TestimonialsSection(),
 
           // Contact CTA
           const ContactCTASection(),
