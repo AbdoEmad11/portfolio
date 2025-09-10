@@ -15,48 +15,7 @@ class FeaturedProjectsSection extends StatefulWidget {
   State<FeaturedProjectsSection> createState() => _FeaturedProjectsSectionState();
 }
 
-class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection>
-    with TickerProviderStateMixin {
-  late AnimationController _staggerController;
-  late List<Animation<double>> _projectAnimations;
-
-  @override
-  void initState() {
-    super.initState();
-    _setupAnimations();
-  }
-
-  void _setupAnimations() {
-    _staggerController = AnimationController(
-      duration: const Duration(milliseconds: 1200),
-      vsync: this,
-    );
-
-    final featuredProjects = ProjectData.projects.where((p) => p.isFeatured).toList();
-    _projectAnimations = List.generate(
-      featuredProjects.length,
-          (index) => Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-          parent: _staggerController,
-          curve: Interval(
-            index * 0.2,
-            0.6 + (index * 0.2),
-            curve: Curves.easeOutBack,
-          ),
-        ),
-      ),
-    );
-
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (mounted) _staggerController.forward();
-    });
-  }
-
-  @override
-  void dispose() {
-    _staggerController.dispose();
-    super.dispose();
-  }
+class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection> {
 
   @override
   Widget build(BuildContext context) {
@@ -99,45 +58,38 @@ class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection>
   }
 
   Widget _buildSectionHeader() {
-    return TweenAnimationBuilder<double>(
-      duration: const Duration(milliseconds: 200),
-      tween: Tween(begin: 0.0, end: 1.0),
-      builder: (context, value, child) {
-        return Opacity(opacity: value, child: child);
-      },
-      child: Column(
-        children: [
-          Text(
-            'Featured Projects',
-            style: context.textTheme.displaySmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Text(
+          'Featured Projects',
+          style: context.textTheme.displaySmall?.copyWith(
+            fontWeight: FontWeight.bold,
           ),
-          const SizedBox(height: 12),
-          Container(
-            width: 60,
-            height: 4,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  context.colorScheme.primary,
-                  context.colorScheme.secondary,
-                ],
-              ),
-              borderRadius: BorderRadius.circular(2),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 12),
+        Container(
+          width: 60,
+          height: 4,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                context.colorScheme.primary,
+                context.colorScheme.secondary,
+              ],
             ),
+            borderRadius: BorderRadius.circular(2),
           ),
-          const SizedBox(height: 16),
-          Text(
-            'Some of my latest work that I\'m proud of',
-            style: context.textTheme.titleMedium?.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-            textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Some of my latest work that I\'m proud of',
+          style: context.textTheme.titleMedium?.copyWith(
+            color: context.colorScheme.onSurfaceVariant,
           ),
-        ],
-      ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 
@@ -159,11 +111,7 @@ class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection>
                     left: index == 0 ? 0 : 8,
                     right: index == featuredProjects.length - 1 ? 0 : 8,
                   ),
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 200),
-                    opacity: 1,
-                    child: _buildProjectCard(project, index),
-                  ),
+                  child: _buildProjectCard(project, index),
                 ),
               );
             }).toList(),
@@ -182,11 +130,7 @@ class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection>
               padding: EdgeInsets.only(
                 bottom: index < featuredProjects.length - 1 ? 24 : 0,
               ),
-              child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 200),
-                opacity: 1,
-                child: _buildProjectCard(project, index),
-              ),
+              child: _buildProjectCard(project, index),
             );
           }).toList(),
         );
@@ -226,71 +170,44 @@ class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection>
             width: double.infinity,
             child: ClipRRect(
               borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 450),
-                switchInCurve: Curves.easeOutCubic,
-                switchOutCurve: Curves.easeInCubic,
-                child: (project.imageUrl?.isNotEmpty ?? false)
-                    ? Hero(
-                        tag: 'project-image-${project.id}',
-                        child: Stack(
-                          fit: StackFit.expand,
+              child: (project.imageUrl?.isNotEmpty ?? false)
+                  ? Image.asset(
+                      project.imageUrl!,
+                      fit: BoxFit.cover,
+                    )
+                  : Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            projectColor.withOpacity(0.9),
+                            projectColor.withOpacity(0.7),
+                            projectColor.withOpacity(0.5),
+                          ],
+                        ),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              project.imageUrl!,
-                              fit: BoxFit.cover,
+                            Icon(
+                              _getProjectIcon(project.category),
+                              size: 48,
+                              color: Colors.white,
                             ),
-                            Positioned.fill(
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.black.withOpacity(0.0),
-                                      Colors.black.withOpacity(0.15),
-                                    ],
-                                  ),
-                                ),
+                            const SizedBox(height: 8),
+                            Text(
+                              _getCategoryString(project.category),
+                              style: context.textTheme.titleMedium?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
                         ),
-                      )
-                    : Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              projectColor.withOpacity(0.9),
-                              projectColor.withOpacity(0.7),
-                              projectColor.withOpacity(0.5),
-                            ],
-                          ),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                _getProjectIcon(project.category),
-                                size: 48,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                _getCategoryString(project.category),
-                                style: context.textTheme.titleMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
-              ),
+                    ),
             ),
           ),
 
@@ -424,24 +341,11 @@ class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection>
   }
 
   Widget _buildViewAllButton() {
-    return TweenAnimationBuilder<double>(
-      duration: const Duration(milliseconds: 800),
-      tween: Tween(begin: 0.0, end: 1.0),
-      builder: (context, value, child) {
-        return Transform.translate(
-          offset: Offset(0, 20 * (1 - value)),
-          child: Opacity(
-            opacity: value,
-            child: child,
-          ),
-        );
-      },
-      child: CustomButton.outlined(
-        text: 'View All Projects',
-        icon: const Icon(Icons.arrow_forward),
-        onPressed: () => context.go('/projects'),
-        size: ButtonSize.large,
-      ),
+    return CustomButton.outlined(
+      text: 'View All Projects',
+      icon: const Icon(Icons.arrow_forward),
+      onPressed: () => context.go('/projects'),
+      size: ButtonSize.large,
     );
   }
 

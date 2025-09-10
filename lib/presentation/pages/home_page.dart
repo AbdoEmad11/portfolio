@@ -83,12 +83,6 @@ class _HomePageState extends State<HomePage>
           // Hero Section
           const HeroSection(),
 
-          // Stats Section
-          const StatsSection(),
-
-          // Skills Overview
-          const SkillsOverviewSection(),
-
           // Featured Projects
           const FeaturedProjectsSection(),
 
