@@ -88580,7 +88580,7 @@ m=A.K(B.c.a7(25.5),B.i.m()>>>16&255,B.i.m()>>>8&255,B.i.m()&255)
 l=A.cD(B.HK,B.i,i,i,18)
 k=A.i(a).ok.z
 j=t.p
-return A.nc(0,A.a2(i,A.aJ(A.b([f,B.bK,s,B.Z,r,B.dH,A.it(i,A.a2(i,A.e9(B.Q,!0,i,A.fM(!1,o,!0,new A.b5(B.FV,A.bL(A.b([l,B.cF,A.a6("View Project",i,i,i,i,k==null?i:k.c_(B.i,B.X),i,i)],j),B.o,B.bU,B.p),i),i,!0,i,m,i,i,i,i,i,new A.akv(b,a),i,i,i,i,n,i,i),B.e,B.v,0,i,i,i,i,i,B.b6),B.e,i,i,new A.af(i,i,i,q,p,new A.bs(B.aB,B.aT,B.C,h,i,i),B.q),i,i,i,i,i,i,1/0),B.S,!1,i,i,i,i,i,i,i,i,i,i,i,i,i,i,i,i,new A.akw(b,a),i,i,i,i,i,i,!1,B.bI)],j),B.ag,B.m,B.p),B.e,i,i,new A.af(i,i,i,i,i,new A.bs(B.d6,B.ci,B.C,g,i,i),B.q),i,i,i,B.cs,i,i,i),i,i,0,0,i,i)},
+return A.nc(0,A.a2(i,A.aJ(A.b([f,B.bK,s,B.Z,r,B.dH,A.it(i,A.a2(i,A.e9(B.Q,!0,i,A.fM(!1,o,!0,new A.b5(B.FV,A.bL(A.b([l,B.cF,A.a6("View Details",i,i,i,i,k==null?i:k.c_(B.i,B.X),i,i)],j),B.o,B.bU,B.p),i),i,!0,i,m,i,i,i,i,i,new A.akv(b,a),i,i,i,i,n,i,i),B.e,B.v,0,i,i,i,i,i,B.b6),B.e,i,i,new A.af(i,i,i,q,p,new A.bs(B.aB,B.aT,B.C,h,i,i),B.q),i,i,i,i,i,i,1/0),B.S,!1,i,i,i,i,i,i,i,i,i,i,i,i,i,i,i,i,new A.akw(b,a),i,i,i,i,i,i,!1,B.bI)],j),B.ag,B.m,B.p),B.e,i,i,new A.af(i,i,i,i,i,new A.bs(B.d6,B.ci,B.C,g,i,i),B.q),i,i,i,B.cs,i,i,i),i,i,0,0,i,i)},
 a6r(a){var s=null,r=A.aD(30),q=A.b([new A.bJ(0,B.ab,A.K(102,B.r.m()>>>16&255,B.r.m()>>>8&255,B.r.m()&255),B.cz,20)],t.V),p=A.aD(30),o=A.cD(B.oN,B.i,s,s,20),n=A.i(a).ok.w
 return A.a2(s,A.e9(B.Q,!0,s,A.fM(!1,p,!0,new A.b5(B.o4,A.bL(A.b([o,B.dG,A.a6("Explore All Projects",s,s,s,s,n==null?s:n.c_(B.i,B.X),s,s)],t.p),B.o,B.m,B.aD),s),s,!0,s,s,s,s,s,s,s,new A.aky(a),s,s,s,s,s,s,s),B.e,B.v,0,s,s,s,s,s,B.b6),B.e,s,s,new A.af(s,s,s,r,q,B.eg,B.q),s,s,s,s,s,s,s)},
 a8M(a){switch(a.a){case 0:return B.kT
@@ -88664,13 +88664,13 @@ return A.a2(s,A.a6(a,s,s,s,s,n==null?s:n.c_(r,B.X),s,s),B.e,s,s,new A.af(q,s,o,p
 $S:73}
 A.akw.prototype={
 $0(){var s,r,q=this.a.a
-A.k9("Button tapped for project: "+q)
+A.k9("View Details button tapped for project: "+q)
 try{A.aAB(this.b,"/project/"+q,t.X)}catch(r){s=A.aq(r)
 A.k9("Navigation error: "+A.n(s))}},
 $S:0}
 A.akv.prototype={
 $0(){var s,r,q=this.a.a
-A.k9("InkWell tapped for project: "+q)
+A.k9("View Details InkWell tapped for project: "+q)
 try{A.aAB(this.b,"/project/"+q,t.X)}catch(r){s=A.aq(r)
 A.k9("Navigation error: "+A.n(s))}},
 $S:0}

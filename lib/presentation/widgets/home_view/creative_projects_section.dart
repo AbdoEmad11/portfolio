@@ -436,7 +436,7 @@ class _CreativeProjectsSectionState extends State<CreativeProjectsSection>
             // Action button
             GestureDetector(
               onTap: () {
-                print('Button tapped for project: ${project.id}');
+                print('View Details button tapped for project: ${project.id}');
                 try {
                   context.push('/project/${project.id}');
                 } catch (e) {
@@ -465,7 +465,7 @@ class _CreativeProjectsSectionState extends State<CreativeProjectsSection>
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
-                      print('InkWell tapped for project: ${project.id}');
+                      print('View Details InkWell tapped for project: ${project.id}');
                       try {
                         context.push('/project/${project.id}');
                       } catch (e) {
@@ -487,7 +487,7 @@ class _CreativeProjectsSectionState extends State<CreativeProjectsSection>
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            'View Project',
+                            'View Details',
                             style: context.textTheme.bodyMedium?.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
