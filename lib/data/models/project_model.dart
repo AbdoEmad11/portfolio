@@ -186,7 +186,7 @@ The application demonstrates expertise in API integration, data modeling, and cr
         'assets/images/cinema_score/8.jpg',
       ],
       demoUrl: 'https://youtu.be/w3GDHM3-TBw?si=O7T3jxzYhf0jeGrw',
-      githubUrl: 'hhttps://github.com/AbdoEmad11/cinema-scor',
+      githubUrl: 'https://github.com/AbdoEmad11/cinema-score',
     ),
   ];
 

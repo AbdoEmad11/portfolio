@@ -151,7 +151,7 @@ class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection>
             children: featuredProjects.asMap().entries.map((entry) {
               final index = entry.key;
               final project = entry.value;
-              return Expanded(
+              return Flexible(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: index == 0 ? 0 : 8,
@@ -376,7 +376,7 @@ class _FeaturedProjectsSectionState extends State<FeaturedProjectsSection>
                 // Action buttons
                 Row(
                   children: [
-                    Expanded(
+                    Flexible(
                       child: CustomButton.filled(
                         text: 'View Details',
                         icon: const Icon(Icons.visibility),
