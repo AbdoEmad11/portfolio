@@ -6,10 +6,8 @@ import '../../core/utils/constants.dart';
 import '../../core/utils/extensions.dart';
 import '../../core/utils/helpers.dart';
 import '../widgets/home_view/hero_section.dart';
-import '../widgets/home_view/about_preview_section.dart';
-import '../widgets/home_view/services_preview_section.dart';
-import '../widgets/home_view/featured_projects_section.dart';
-import '../widgets/home_view/testimonials_section.dart';
+import '../widgets/home_view/creative_projects_section.dart';
+import '../widgets/home_view/creative_skills_section.dart';
 import '../widgets/home_view/contact_cta_section.dart';
 
 class HomePage extends StatefulWidget {
@@ -81,20 +79,14 @@ class _HomePageState extends State<HomePage>
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
-          // Hero Section
+          // Creative Hero Section
           const HeroSection(),
 
-          // About Preview Section
-          const AboutPreviewSection(),
+          // Creative Projects Showcase
+          const CreativeProjectsSection(),
 
-          // Services Preview Section
-          const ServicesPreviewSection(),
-
-          // Featured Projects
-          const FeaturedProjectsSection(),
-
-          // Testimonials/Achievements Section
-          const TestimonialsSection(),
+          // Creative Skills Section
+          const CreativeSkillsSection(),
 
           // Contact CTA
           const ContactCTASection(),
