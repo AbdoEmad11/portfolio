@@ -434,8 +434,15 @@ class _CreativeProjectsSectionState extends State<CreativeProjectsSection>
             const SizedBox(height: 20),
             
             // Action button
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
+            GestureDetector(
+              onTap: () {
+                print('Button tapped for project: ${project.id}');
+                try {
+                  context.push('/project/${project.id}');
+                } catch (e) {
+                  print('Navigation error: $e');
+                }
+              },
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -457,8 +464,17 @@ class _CreativeProjectsSectionState extends State<CreativeProjectsSection>
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () => context.push('/project/${project.id}'),
+                    onTap: () {
+                      print('InkWell tapped for project: ${project.id}');
+                      try {
+                        context.push('/project/${project.id}');
+                      } catch (e) {
+                        print('Navigation error: $e');
+                      }
+                    },
                     borderRadius: BorderRadius.circular(12),
+                    splashColor: Colors.white.withOpacity(0.2),
+                    highlightColor: Colors.white.withOpacity(0.1),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: Row(
