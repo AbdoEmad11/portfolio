@@ -197,14 +197,12 @@ class _HeroSectionState extends State<HeroSection>
   Widget _buildMobileLayout() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 48),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildVisualElement(),
-            const SizedBox(height: 32),
-            _buildContent(),
-          ],
-        ),
+      child: Column(
+        children: [
+          _buildVisualElement(),
+          const SizedBox(height: 32),
+          _buildContent(),
+        ],
       ),
     );
   }

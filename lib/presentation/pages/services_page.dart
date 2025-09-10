@@ -250,13 +250,11 @@ class _ServicesPageState extends State<ServicesPage>
           const SizedBox(height: 12),
 
           // Description
-          Expanded(
-            child: Text(
-              service['description']!,
-              style: context.textTheme.bodyLarge?.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-                height: 1.6,
-              ),
+          Text(
+            service['description']!,
+            style: context.textTheme.bodyLarge?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+              height: 1.6,
             ),
           ),
 
