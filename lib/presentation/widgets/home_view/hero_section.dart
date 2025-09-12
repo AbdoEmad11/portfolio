@@ -385,27 +385,6 @@ class _HeroSectionState extends State<HeroSection>
               child: child,
             );
           },
-          child: Row(
-            mainAxisAlignment: context.isDesktop
-                ? MainAxisAlignment.start
-                : MainAxisAlignment.center,
-            children: [
-              _buildSocialIcon(
-                FontAwesomeIcons.github,
-                    () => AppHelpers.launchURL(AppConstants.github),
-              ),
-              const SizedBox(width: 16),
-              _buildSocialIcon(
-                FontAwesomeIcons.linkedin,
-                    () => AppHelpers.launchURL(AppConstants.linkedIn),
-              ),
-              const SizedBox(width: 16),
-              _buildSocialIcon(
-                FontAwesomeIcons.envelope,
-                    () => AppHelpers.launchEmail(AppConstants.email),
-              ),
-            ],
-          ),
         ),
       ],
     );
@@ -438,19 +417,19 @@ class _HeroSectionState extends State<HeroSection>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF2196F3), // Flutter Blue
-                Color(0xFF03DAC6), // Flutter Teal
-                Color(0xFF4CAF50), // Material Green
+                Color(0xFF0D47A1), // Deep Blue
+                Color(0xFF1976D2), // Primary Blue
+                Color(0xFF42A5F5), // Light Blue
               ],
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF2196F3).withOpacity(0.4),
+                color: const Color(0xFF1976D2).withOpacity(0.45),
                 blurRadius: 40,
                 offset: const Offset(0, 15),
               ),
               BoxShadow(
-                color: const Color(0xFF03DAC6).withOpacity(0.2),
+                color: const Color(0xFF0D47A1).withOpacity(0.25),
                 blurRadius: 60,
                 offset: const Offset(0, 25),
               ),
@@ -459,32 +438,31 @@ class _HeroSectionState extends State<HeroSection>
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // Flutter logo background
+              // Logo holder background
               Container(
                 width: context.responsiveValue(
-                  mobile: 80,
-                  tablet: 100,
-                  desktop: 120,
+                  mobile: 92,
+                  tablet: 112,
+                  desktop: 136,
                 ),
                 height: context.responsiveValue(
-                  mobile: 80,
-                  tablet: 100,
-                  desktop: 120,
+                  mobile: 92,
+                  tablet: 112,
+                  desktop: 136,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withOpacity(0.08),
                   shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white.withOpacity(0.15), width: 1),
                 ),
-              ),
-              // Flutter F icon
-              Icon(
-                Icons.flutter_dash,
-                size: context.responsiveValue(
-                  mobile: 60,
-                  tablet: 75,
-                  desktop: 90,
+                clipBehavior: Clip.antiAlias,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    fit: BoxFit.contain,
+                  ),
                 ),
-                color: Colors.white,
               ),
               // Animated rings
               ...List.generate(3, (index) {

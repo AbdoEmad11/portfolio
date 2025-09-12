@@ -50,13 +50,13 @@ class MyApp extends StatelessWidget {
     const primaryBlue = Color(0xFF0D47A1);
     final scheme = ColorScheme.fromSeed(
       seedColor: primaryBlue,
-      brightness: Brightness.dark,
+      brightness: Brightness.light,
     ).copyWith(
-      surface: const Color(0xFF0B0B0B),
-      surfaceContainerHighest: const Color(0xFF121212),
-      background: const Color(0xFF0B0B0B),
-      onSurface: Colors.white,
-      onBackground: Colors.white,
+      surface: const Color(0xFFFDFDFD),
+      surfaceContainerHighest: const Color(0xFFF3F6FA),
+      background: const Color(0xFFFFFFFF),
+      onSurface: const Color(0xFF0B0B0B),
+      onBackground: const Color(0xFF0B0B0B),
       primary: primaryBlue,
       onPrimary: Colors.white,
       secondary: const Color(0xFF1976D2),
@@ -65,10 +65,10 @@ class MyApp extends StatelessWidget {
 
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.dark,
+      brightness: Brightness.light,
       colorScheme: scheme,
       scaffoldBackgroundColor: scheme.background,
-      textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+      textTheme: GoogleFonts.poppinsTextTheme(),
       appBarTheme: AppBarTheme(
         backgroundColor: scheme.surface,
         foregroundColor: scheme.onSurface,
@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
       ),
       cardTheme: CardThemeData(
         elevation: 8,
-        shadowColor: Colors.black.withValues(alpha: 0.4),
+        shadowColor: Colors.grey.withValues(alpha: 0.2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         color: scheme.surfaceContainerHighest,
       ),
@@ -106,7 +106,7 @@ class MyApp extends StatelessWidget {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           elevation: 0,
-          side: BorderSide(color: scheme.primary.withValues(alpha: 0.6)),
+          side: BorderSide(color: scheme.primary.withValues(alpha: 0.4)),
           foregroundColor: scheme.onSurface,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
