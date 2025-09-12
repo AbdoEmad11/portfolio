@@ -6,8 +6,8 @@ import '../../core/utils/constants.dart';
 import '../../core/utils/extensions.dart';
 import '../../core/utils/helpers.dart';
 import '../widgets/home_view/hero_section.dart';
-import '../widgets/home_view/creative_projects_section.dart';
-import '../widgets/home_view/creative_skills_section.dart';
+import '../widgets/home_view/featured_projects_section.dart';
+import '../widgets/home_view/skills_overview_section.dart';
 import '../widgets/home_view/contact_cta_section.dart';
 
 class HomePage extends StatefulWidget {
@@ -79,14 +79,15 @@ class _HomePageState extends State<HomePage>
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
-          // Creative Hero Section
+          // Hero Section
           const HeroSection(),
 
-          // Creative Projects Showcase
-          const CreativeProjectsSection(),
+          // Stats Section
+          // Skills Overview
+          const SkillsOverviewSection(),
 
-          // Creative Skills Section
-          const CreativeSkillsSection(),
+          // Featured Projects
+          const FeaturedProjectsSection(),
 
           // Contact CTA
           const ContactCTASection(),
@@ -138,9 +139,9 @@ class _HomePageState extends State<HomePage>
             children: [
               // Main footer content
               context.isDesktop ? _buildDesktopFooter() : _buildMobileFooter(),
-              
+
               const SizedBox(height: 32),
-              
+
               // Divider
               Container(
                 height: 1,
@@ -154,9 +155,9 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 24),
-              
+
               // Copyright
               Text(
                 '© 2025 ${AppConstants.name}. Built with Flutter & Dart ❤️',
@@ -166,9 +167,9 @@ class _HomePageState extends State<HomePage>
                 ),
                 textAlign: TextAlign.center,
               ),
-              
+
               const SizedBox(height: 8),
-              
+
               // Flutter badge
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -235,19 +236,19 @@ class _HomePageState extends State<HomePage>
               Row(
                 children: [
                   _buildSocialButton(
-                    icon: FontAwesomeIcons.envelope,
+                    icon: Icons.email_rounded,
                     onTap: () => AppHelpers.launchEmail(AppConstants.email),
                     tooltip: 'Email',
                   ),
                   const SizedBox(width: 16),
                   _buildSocialButton(
-                    icon: FontAwesomeIcons.linkedin,
+                    icon: Icons.work_rounded,
                     onTap: () => AppHelpers.launchURL(AppConstants.linkedIn),
                     tooltip: 'LinkedIn',
                   ),
                   const SizedBox(width: 16),
                   _buildSocialButton(
-                    icon: FontAwesomeIcons.github,
+                    icon: Icons.code_rounded,
                     onTap: () => AppHelpers.launchURL(AppConstants.github),
                     tooltip: 'GitHub',
                   ),
@@ -256,9 +257,9 @@ class _HomePageState extends State<HomePage>
             ],
           ),
         ),
-        
+
         const SizedBox(width: 48),
-        
+
         // Right side - Quick links
         Expanded(
           child: Column(
@@ -308,19 +309,19 @@ class _HomePageState extends State<HomePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildSocialButton(
-              icon: FontAwesomeIcons.envelope,
+              icon: Icons.email_rounded,
               onTap: () => AppHelpers.launchEmail(AppConstants.email),
               tooltip: 'Email',
             ),
             const SizedBox(width: 16),
             _buildSocialButton(
-              icon: FontAwesomeIcons.linkedin,
+              icon: Icons.work_rounded,
               onTap: () => AppHelpers.launchURL(AppConstants.linkedIn),
               tooltip: 'LinkedIn',
             ),
             const SizedBox(width: 16),
             _buildSocialButton(
-              icon: FontAwesomeIcons.github,
+              icon: Icons.code_rounded,
               onTap: () => AppHelpers.launchURL(AppConstants.github),
               tooltip: 'GitHub',
             ),

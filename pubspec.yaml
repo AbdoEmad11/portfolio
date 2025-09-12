@@ -50,6 +50,8 @@ flutter:
     - assets/images/baseera/
     - assets/images/cinema_score/
     - assets/animations/
+    - assets/logo.png
+    - assets/logo2.png
 
   # An image asset can refer to one or more resolution-variant files
   # For details regarding adding assets from package dependencies, see

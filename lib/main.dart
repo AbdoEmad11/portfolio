@@ -13,6 +13,7 @@ import 'presentation/pages/projects_page.dart';
 import 'presentation/pages/project_gallery_page.dart';
 import 'presentation/pages/achievements_page.dart';
 import 'presentation/pages/contact_page.dart';
+import 'presentation/pages/splash_page.dart';
 import 'core/widgets/adaptive_layout.dart';
 
 void main() async {
@@ -46,32 +47,49 @@ class MyApp extends StatelessWidget {
   }
 
   ThemeData _buildLightTheme() {
+    const primaryBlue = Color(0xFF0D47A1);
+    final scheme = ColorScheme.fromSeed(
+      seedColor: primaryBlue,
+      brightness: Brightness.dark,
+    ).copyWith(
+      surface: const Color(0xFF0B0B0B),
+      surfaceContainerHighest: const Color(0xFF121212),
+      background: const Color(0xFF0B0B0B),
+      onSurface: Colors.white,
+      onBackground: Colors.white,
+      primary: primaryBlue,
+      onPrimary: Colors.white,
+      secondary: const Color(0xFF1976D2),
+      onSecondary: Colors.white,
+    );
+
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.light,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF2196F3),
-        brightness: Brightness.light,
-      ),
-      textTheme: GoogleFonts.poppinsTextTheme(),
+      brightness: Brightness.dark,
+      colorScheme: scheme,
+      scaffoldBackgroundColor: scheme.background,
+      textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black87,
+        backgroundColor: scheme.surface,
+        foregroundColor: scheme.onSurface,
         elevation: 0,
         titleTextStyle: GoogleFonts.poppins(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: Colors.black87,
+          color: scheme.onSurface,
         ),
       ),
       cardTheme: CardThemeData(
         elevation: 8,
-        shadowColor: Colors.grey.withValues(alpha: 0.15),
+        shadowColor: Colors.black.withValues(alpha: 0.4),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        color: scheme.surfaceContainerHighest,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           elevation: 0,
+          backgroundColor: scheme.primary,
+          foregroundColor: scheme.onPrimary,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -79,6 +97,8 @@ class MyApp extends StatelessWidget {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           elevation: 0,
+          backgroundColor: scheme.secondary,
+          foregroundColor: scheme.onSecondary,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -86,6 +106,8 @@ class MyApp extends StatelessWidget {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           elevation: 0,
+          side: BorderSide(color: scheme.primary.withValues(alpha: 0.6)),
+          foregroundColor: scheme.onSurface,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -94,33 +116,49 @@ class MyApp extends StatelessWidget {
   }
 
   ThemeData _buildDarkTheme() {
+    const primaryBlue = Color(0xFF0D47A1);
+    final scheme = ColorScheme.fromSeed(
+      seedColor: primaryBlue,
+      brightness: Brightness.dark,
+    ).copyWith(
+      surface: const Color(0xFF0B0B0B),
+      surfaceContainerHighest: const Color(0xFF121212),
+      background: const Color(0xFF0B0B0B),
+      onSurface: Colors.white,
+      onBackground: Colors.white,
+      primary: primaryBlue,
+      onPrimary: Colors.white,
+      secondary: const Color(0xFF1976D2),
+      onSecondary: Colors.white,
+    );
+
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF2196F3),
-        brightness: Brightness.dark,
-      ),
+      colorScheme: scheme,
+      scaffoldBackgroundColor: scheme.background,
       textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
       appBarTheme: AppBarTheme(
-        backgroundColor: const Color(0xFF1E1E1E),
-        foregroundColor: Colors.white,
+        backgroundColor: scheme.surface,
+        foregroundColor: scheme.onSurface,
         elevation: 0,
         titleTextStyle: GoogleFonts.poppins(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: Colors.white,
+          color: scheme.onSurface,
         ),
       ),
       cardTheme: CardThemeData(
         elevation: 8,
         shadowColor: Colors.black.withValues(alpha: 0.4),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: const Color(0xFF2D2D2D),
+        color: scheme.surfaceContainerHighest,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           elevation: 0,
+          backgroundColor: scheme.primary,
+          foregroundColor: scheme.onPrimary,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -128,6 +166,8 @@ class MyApp extends StatelessWidget {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           elevation: 0,
+          backgroundColor: scheme.secondary,
+          foregroundColor: scheme.onSecondary,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -135,6 +175,8 @@ class MyApp extends StatelessWidget {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           elevation: 0,
+          side: BorderSide(color: scheme.primary.withValues(alpha: 0.6)),
+          foregroundColor: scheme.onSurface,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -144,8 +186,16 @@ class MyApp extends StatelessWidget {
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/splash',
   routes: [
+    GoRoute(
+      path: '/splash',
+      name: 'splash',
+      pageBuilder: (context, state) => _buildPageWithTransition(
+        const SplashPage(),
+        state,
+      ),
+    ),
     ShellRoute(
       builder: (context, state, child) {
         return AdaptiveLayout(child: child);
