@@ -9,7 +9,7 @@
 
 **Professional portfolio app for Abdelrahman Emad - Flutter Developer**
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://abdoemad11.github.io/portfolio/)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-000000?style=for-the-badge&logo=githubpages&logoColor=white)](https://abdoemad11.github.io/portfolio/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AbdoEmad11/portfolio)
 
 </div>
@@ -19,6 +19,8 @@
 ## ✨ Features
 
 - 🎨 **Modern UI/UX** - Clean, responsive design with smooth animations
+- 🖌️ **Blue & Black Theme** - Unified deep-blue accents on near-black surfaces
+- 🚀 **2s Splash Screen** - Minimal logo splash with subtle fade/scale
 - 📱 **Cross-Platform** - Works on Web, Android, iOS, Windows, macOS, and Linux
 - 🎭 **Interactive Animations** - Lottie animations and custom transitions
 - 🌐 **Web Deployed** - Automatically deployed to GitHub Pages
@@ -121,6 +123,11 @@ lib/
 
 This project is automatically deployed to GitHub Pages using GitHub Actions.
 
+### Deployment via GitHub Actions (recommended)
+1. Push to `main`. A workflow builds web with `--base-href /portfolio/` and deploys to Pages.
+2. Repo Settings → Pages → Source: GitHub Actions.
+3. Live at: https://abdoemad11.github.io/portfolio/
+
 ### Manual Deployment
 ```bash
 # Build for web
@@ -129,6 +136,10 @@ flutter build web --release --base-href /portfolio/
 # Deploy to GitHub Pages
 # (Automatically handled by GitHub Actions)
 ```
+
+### Troubleshooting (stale page after deploy)
+- Hard refresh (Ctrl+Shift+R / Cmd+Shift+R) to bypass the service worker cache.
+- Or open `https://abdoemad11.github.io/portfolio/version.json?cacheBust=123` then reload.
 
 ## 📊 Performance
 
