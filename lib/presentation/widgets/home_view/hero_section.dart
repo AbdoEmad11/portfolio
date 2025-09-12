@@ -439,35 +439,26 @@ class _HeroSectionState extends State<HeroSection>
                   ),
                 ),
               ),
-              // Animated rings
+              // Static decorative rings (web-safe)
               ...List.generate(3, (index) {
-                return TweenAnimationBuilder<double>(
-                  duration: Duration(seconds: 3 + index),
-                  tween: Tween(begin: 0.0, end: 1.0),
-                  builder: (context, value, child) {
-                    return Transform.rotate(
-                      angle: value * 2 * 3.14159,
-                      child: Container(
-                        width: context.responsiveValue(
-                          mobile: 120 + (index * 20),
-                          tablet: 150 + (index * 25),
-                          desktop: 180 + (index * 30),
-                        ),
-                        height: context.responsiveValue(
-                          mobile: 120 + (index * 20),
-                          tablet: 150 + (index * 25),
-                          desktop: 180 + (index * 30),
-                        ),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.1 - (index * 0.03)),
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                return Container(
+                  width: context.responsiveValue(
+                    mobile: 120 + (index * 20),
+                    tablet: 150 + (index * 25),
+                    desktop: 180 + (index * 30),
+                  ),
+                  height: context.responsiveValue(
+                    mobile: 120 + (index * 20),
+                    tablet: 150 + (index * 25),
+                    desktop: 180 + (index * 30),
+                  ),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.08 - (index * 0.02)),
+                      width: 1.5,
+                    ),
+                  ),
                 );
               }),
             ],

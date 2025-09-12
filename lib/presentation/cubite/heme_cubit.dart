@@ -11,9 +11,14 @@ class ThemeCubit extends Cubit<ThemeMode> {
   }
 
   void _loadTheme() {
-    // Default to dark if no preference saved
-    final themeIndex = _prefs.getInt(_themeKey) ?? ThemeMode.dark.index;
-    emit(ThemeMode.values[themeIndex]);
+    // Persisted default: if no preference saved, set and use dark mode
+    final saved = _prefs.getInt(_themeKey);
+    if (saved == null) {
+      _prefs.setInt(_themeKey, ThemeMode.dark.index);
+      emit(ThemeMode.dark);
+    } else {
+      emit(ThemeMode.values[saved]);
+    }
   }
 
   void toggleTheme() {
