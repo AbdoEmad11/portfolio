@@ -1,10 +1,8 @@
 name: Deploy Flutter Web to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  # Disable auto-deploy as we deploy from docs branch-based Pages now
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -23,12 +21,8 @@ jobs:
     - name: Install dependencies
       run: flutter pub get
       
-    - name: Build web app
-      run: flutter build web --release
+    - name: Build web app (with repo path)
+      run: flutter build web --release --base-href /portfolio/
       
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main'
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/web
+    # Pages is configured from /docs, so this workflow is manual-only now.
+    # If you switch back to Actions-based Pages, re-enable deployment here.

@@ -1,8 +1,7 @@
 name: Deploy Flutter Web to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
+  # Switch to manual runs to avoid conflicts with docs-based Pages deployment
   workflow_dispatch:
 
 permissions:
