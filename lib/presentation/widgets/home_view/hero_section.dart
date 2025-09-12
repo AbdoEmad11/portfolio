@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 import 'package:go_router/go_router.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -25,10 +24,11 @@ class _HeroSectionState extends State<HeroSection>
 
   final List<String> _typewriterTexts = [
     'Flutter Developer',
-    'Software Engineer',
-    'Flutter Developer',
-    'Software Engineer',
-
+    'Cross-Platform Expert',
+    'Mobile & Web Developer',
+    'Dart Enthusiast',
+    'UI/UX Designer',
+    'Firebase Specialist',
   ];
 
   int _currentTextIndex = 0;
@@ -108,70 +108,21 @@ class _HeroSectionState extends State<HeroSection>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Animated blue gradient background
-        Positioned.fill(
-          child: AnimatedBuilder(
-            animation: _floatingController,
-            builder: (context, _) {
-              final t = _floatingController.value;
-              final begin = Alignment(-0.8 + 0.6 * t, -1.0);
-              final end = Alignment(1.0, 0.6 - 0.6 * t);
-              return Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: begin,
-                    end: end,
-                    colors: const [
-                      Color(0xFF0D47A1),
-                      Color(0xFF1976D2),
-                      Color(0xFF0B0B0B),
-                    ],
-                    stops: const [0.0, 0.45, 1.0],
-                  ),
-                ),
-              );
-            },
+    return Container(
+      width: double.infinity,
+      decoration: _buildGradientBackground(),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveValue(
+            mobile: 16,
+            tablet: 24,
+            desktop: 32,
           ),
         ),
-
-        // Subtle vignette overlay
-        Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.black.withOpacity(0.25),
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.25),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-          ),
-        ),
-
-        // Foreground content
-        Positioned.fill(
-          child: Container(
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: context.responsiveValue(
-                  mobile: 16,
-                  tablet: 24,
-                  desktop: 32,
-                ),
-              ),
-              child: context.isDesktop
-                  ? _buildDesktopLayout()
-                  : _buildMobileLayout(),
-            ),
-          ),
-        ),
-      ],
+        child: context.isDesktop
+            ? _buildDesktopLayout()
+            : _buildMobileLayout(),
+      ),
     );
   }
 
@@ -259,22 +210,7 @@ class _HeroSectionState extends State<HeroSection>
   }
 
   Widget _buildContent() {
-    final glassColor = Colors.white.withOpacity(context.isDesktop ? 0.06 : 0.08);
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: BackdropFilter(
-        filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-        child: Container(
-          decoration: BoxDecoration(
-            color: glassColor,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white.withOpacity(0.08)),
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: context.isDesktop ? 24 : 16,
-            vertical: context.isDesktop ? 24 : 16,
-          ),
-          child: Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: context.isDesktop
           ? CrossAxisAlignment.start
@@ -411,6 +347,31 @@ class _HeroSectionState extends State<HeroSection>
               ),
             );
           },
+          child: Wrap(
+            alignment: context.isDesktop
+                ? WrapAlignment.start
+                : WrapAlignment.center,
+            spacing: 16,
+            runSpacing: 16,
+            children: [
+              Flexible(
+                child: CustomButton.filled(
+                  text: 'View My Projects',
+                  icon: const Icon(Icons.folder_outlined),
+                  onPressed: () => context.go('/projects'),
+                  size: ButtonSize.large,
+                ),
+              ),
+              Flexible(
+                child: CustomButton.outlined(
+                  text: 'Get In Touch',
+                  icon: const Icon(Icons.contact_mail_outlined),
+                  onPressed: () => context.go('/contact'),
+                  size: ButtonSize.large,
+                ),
+              ),
+            ],
+          ),
         ),
 
         const SizedBox(height: 32),
@@ -425,11 +386,29 @@ class _HeroSectionState extends State<HeroSection>
               child: child,
             );
           },
-        ),
-      ],
+          child: Row(
+            mainAxisAlignment: context.isDesktop
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.center,
+            children: [
+              _buildSocialIcon(
+                FontAwesomeIcons.github,
+                    () => AppHelpers.launchURL(AppConstants.github),
+              ),
+              const SizedBox(width: 16),
+              _buildSocialIcon(
+                FontAwesomeIcons.linkedin,
+                    () => AppHelpers.launchURL(AppConstants.linkedIn),
+              ),
+              const SizedBox(width: 16),
+              _buildSocialIcon(
+                FontAwesomeIcons.envelope,
+                    () => AppHelpers.launchEmail(AppConstants.email),
+              ),
+            ],
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -460,19 +439,19 @@ class _HeroSectionState extends State<HeroSection>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF0D47A1), // Deep Blue
-                Color(0xFF1976D2), // Primary Blue
-                Color(0xFF42A5F5), // Light Blue
+                Color(0xFF2196F3), // Flutter Blue
+                Color(0xFF03DAC6), // Flutter Teal
+                Color(0xFF4CAF50), // Material Green
               ],
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF1976D2).withOpacity(0.45),
+                color: const Color(0xFF2196F3).withOpacity(0.4),
                 blurRadius: 40,
                 offset: const Offset(0, 15),
               ),
               BoxShadow(
-                color: const Color(0xFF0D47A1).withOpacity(0.25),
+                color: const Color(0xFF03DAC6).withOpacity(0.2),
                 blurRadius: 60,
                 offset: const Offset(0, 25),
               ),
@@ -481,52 +460,62 @@ class _HeroSectionState extends State<HeroSection>
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // Logo holder background
+              // Flutter logo background
               Container(
                 width: context.responsiveValue(
-                  mobile: 92,
-                  tablet: 112,
-                  desktop: 136,
+                  mobile: 80,
+                  tablet: 100,
+                  desktop: 120,
                 ),
                 height: context.responsiveValue(
-                  mobile: 92,
-                  tablet: 112,
-                  desktop: 136,
+                  mobile: 80,
+                  tablet: 100,
+                  desktop: 120,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.08),
+                  color: Colors.white.withOpacity(0.2),
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withOpacity(0.15), width: 1),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Image.asset(
-                    'assets/logo.png',
-                    fit: BoxFit.contain,
-                  ),
                 ),
               ),
-              // Static decorative rings (web-safe)
+              // Flutter F icon
+              Icon(
+                Icons.flutter_dash,
+                size: context.responsiveValue(
+                  mobile: 60,
+                  tablet: 75,
+                  desktop: 90,
+                ),
+                color: Colors.white,
+              ),
+              // Animated rings
               ...List.generate(3, (index) {
-                return Container(
-                  width: context.responsiveValue(
-                    mobile: 120 + (index * 20),
-                    tablet: 150 + (index * 25),
-                    desktop: 180 + (index * 30),
-                  ),
-                  height: context.responsiveValue(
-                    mobile: 120 + (index * 20),
-                    tablet: 150 + (index * 25),
-                    desktop: 180 + (index * 30),
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.08 - (index * 0.02)),
-                      width: 1.5,
-                    ),
-                  ),
+                return TweenAnimationBuilder<double>(
+                  duration: Duration(seconds: 3 + index),
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  builder: (context, value, child) {
+                    return Transform.rotate(
+                      angle: value * 2 * 3.14159,
+                      child: Container(
+                        width: context.responsiveValue(
+                          mobile: 120 + (index * 20),
+                          tablet: 150 + (index * 25),
+                          desktop: 180 + (index * 30),
+                        ),
+                        height: context.responsiveValue(
+                          mobile: 120 + (index * 20),
+                          tablet: 150 + (index * 25),
+                          desktop: 180 + (index * 30),
+                        ),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.1 - (index * 0.03)),
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 );
               }),
             ],
