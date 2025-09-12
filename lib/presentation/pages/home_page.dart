@@ -6,6 +6,8 @@ import '../../core/utils/constants.dart';
 import '../../core/utils/extensions.dart';
 import '../../core/utils/helpers.dart';
 import '../widgets/home_view/hero_section.dart';
+import '../widgets/home_view/stats_section.dart';
+import '../widgets/home_view/tech_marquee.dart';
 import '../widgets/home_view/featured_projects_section.dart';
 import '../widgets/home_view/skills_overview_section.dart';
 import '../widgets/home_view/contact_cta_section.dart';
@@ -82,7 +84,12 @@ class _HomePageState extends State<HomePage>
           // Hero Section
           const HeroSection(),
 
+          // Tech marquee
+          const TechMarquee(),
+
           // Stats Section
+          const StatsSection(),
+
           // Skills Overview
           const SkillsOverviewSection(),
 
