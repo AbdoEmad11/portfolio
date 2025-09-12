@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 import 'package:go_router/go_router.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -107,21 +108,70 @@ class _HeroSectionState extends State<HeroSection>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: _buildGradientBackground(),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveValue(
-            mobile: 16,
-            tablet: 24,
-            desktop: 32,
+    return Stack(
+      children: [
+        // Animated blue gradient background
+        Positioned.fill(
+          child: AnimatedBuilder(
+            animation: _floatingController,
+            builder: (context, _) {
+              final t = _floatingController.value;
+              final begin = Alignment(-0.8 + 0.6 * t, -1.0);
+              final end = Alignment(1.0, 0.6 - 0.6 * t);
+              return Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: begin,
+                    end: end,
+                    colors: const [
+                      Color(0xFF0D47A1),
+                      Color(0xFF1976D2),
+                      Color(0xFF0B0B0B),
+                    ],
+                    stops: const [0.0, 0.45, 1.0],
+                  ),
+                ),
+              );
+            },
           ),
         ),
-        child: context.isDesktop
-            ? _buildDesktopLayout()
-            : _buildMobileLayout(),
-      ),
+
+        // Subtle vignette overlay
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.black.withOpacity(0.25),
+                  Colors.transparent,
+                  Colors.black.withOpacity(0.25),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+          ),
+        ),
+
+        // Foreground content
+        Positioned.fill(
+          child: Container(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveValue(
+                  mobile: 16,
+                  tablet: 24,
+                  desktop: 32,
+                ),
+              ),
+              child: context.isDesktop
+                  ? _buildDesktopLayout()
+                  : _buildMobileLayout(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -209,7 +259,22 @@ class _HeroSectionState extends State<HeroSection>
   }
 
   Widget _buildContent() {
-    return Column(
+    final glassColor = Colors.white.withOpacity(context.isDesktop ? 0.06 : 0.08);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+        child: Container(
+          decoration: BoxDecoration(
+            color: glassColor,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.white.withOpacity(0.08)),
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: context.isDesktop ? 24 : 16,
+            vertical: context.isDesktop ? 24 : 16,
+          ),
+          child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: context.isDesktop
           ? CrossAxisAlignment.start
@@ -362,6 +427,9 @@ class _HeroSectionState extends State<HeroSection>
           },
         ),
       ],
+          ),
+        ),
+      ),
     );
   }
 
