@@ -346,31 +346,6 @@ class _HeroSectionState extends State<HeroSection>
               ),
             );
           },
-          child: Wrap(
-            alignment: context.isDesktop
-                ? WrapAlignment.start
-                : WrapAlignment.center,
-            spacing: 16,
-            runSpacing: 16,
-            children: [
-              Flexible(
-                child: CustomButton.filled(
-                  text: 'View My Projects',
-                  icon: const Icon(Icons.folder_outlined),
-                  onPressed: () => context.go('/projects'),
-                  size: ButtonSize.large,
-                ),
-              ),
-              Flexible(
-                child: CustomButton.outlined(
-                  text: 'Get In Touch',
-                  icon: const Icon(Icons.contact_mail_outlined),
-                  onPressed: () => context.go('/contact'),
-                  size: ButtonSize.large,
-                ),
-              ),
-            ],
-          ),
         ),
 
         const SizedBox(height: 32),
