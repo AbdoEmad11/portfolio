@@ -223,7 +223,7 @@ class _HeroSectionState extends State<HeroSection>
     return ClipRRect(
       borderRadius: BorderRadius.circular(24),
       child: BackdropFilter(
-        filter: ui.ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        filter: ui.ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: Container(
           padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
@@ -231,9 +231,9 @@ class _HeroSectionState extends State<HeroSection>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Colors.white.withOpacity(0.05),
-                Colors.blue.withOpacity(0.03),
-                Colors.transparent,
+                Colors.white.withOpacity(0.10),
+                Colors.blue.withOpacity(0.06),
+                Colors.white.withOpacity(0.04),
               ],
             ),
             borderRadius: BorderRadius.circular(24),

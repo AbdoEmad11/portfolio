@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/extensions.dart';
 import '../../../core/utils/helpers.dart';
+import '../../../core/widgets/custom_button.dart';
 import '../../../data/models/project_model.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -204,9 +206,51 @@ class ProjectCard extends StatelessWidget {
               color: context.colorScheme.onSurfaceVariant,
             ),
           ),
+          Row(
+            children: [
+              Flexible(
+                child: CustomButton.filled(
+                  text: 'View Details',
+                  icon: const Icon(Icons.visibility),
+                  onPressed: () => context.push('/project/${project.id}'),
+                  size: ButtonSize.medium,
+                ),
+              ),
+              if (project.githubUrl != null) ...[
+                const SizedBox(width: 8),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Colors.blue.withOpacity(0.1),
+                        Colors.blue.withOpacity(0.05),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.blue.withOpacity(0.3),
+                      width: 1,
+                    ),
+                  ),
+                  child: IconButton(
+                    onPressed: () => AppHelpers.launchURL(project.githubUrl!),
+                    icon: FaIcon(
+                      FontAwesomeIcons.github,
+                      color: Colors.blue,
+                      size: 18,
+                    ),
+                    tooltip: 'View on GitHub',
+                  ),
+                ),
+              ],
+            ],
+          )
         ],
       ),
     );
+
   }
 
   Widget _buildActionButton(

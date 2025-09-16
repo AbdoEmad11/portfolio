@@ -22,13 +22,27 @@ class _HomePageState extends State<HomePage>
     with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
+  late ScrollController _scrollController;
+  double _scrollProgress = 0.0;
   bool _hasAnimated = false;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_updateScrollProgress);
     _setupAnimations();
     _startAnimations();
+  }
+
+  void _updateScrollProgress() {
+    if (_scrollController.hasClients) {
+      final maxScroll = _scrollController.position.maxScrollExtent;
+      final currentScroll = _scrollController.position.pixels;
+      setState(() {
+        _scrollProgress = maxScroll > 0 ? currentScroll / maxScroll : 0.0;
+      });
+    }
   }
 
   void _setupAnimations() {
@@ -55,6 +69,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _fadeController.dispose();
     super.dispose();
   }
@@ -62,21 +77,42 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimatedBuilder(
-        animation: _fadeAnimation,
-        builder: (context, child) {
-          return FadeTransition(
-            opacity: _fadeAnimation,
-            child: child,
-          );
-        },
-        child: _buildBody(),
+      body: Stack(
+        children: [
+          AnimatedBuilder(
+            animation: _fadeAnimation,
+            builder: (context, child) {
+              return FadeTransition(
+                opacity: _fadeAnimation,
+                child: child,
+              );
+            },
+            child: _buildBody(),
+          ),
+          // Scroll progress indicator
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 3,
+              child: LinearProgressIndicator(
+                value: _scrollProgress,
+                backgroundColor: Colors.transparent,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildBody() {
     return SingleChildScrollView(
+      controller: _scrollController,
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
